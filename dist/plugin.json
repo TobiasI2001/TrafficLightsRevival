@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "TrafficLightsRevival",
+  "id": "tobias2001-trafficlightsrevival-panel",
+  "info": {
+    "description": "",
+    "author": {
+      "name": "Tobias Indenkämpen",
+      "url": "https://github.com/TobiasI2001"
+    },
+    "keywords": ["traffic_light", "panel"],
+    "logos": {
+      "small": "img/TrafficLightsRevival_Logo.png",
+      "large": "img/TrafficLightsRevival_Logo.png"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/TobiasI2001/TrafficLightsRevival"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/TobiasI2001/TrafficLightsRevival/blob/master/LICENSE"
+      }
+    ],
+	"screenshots": [
+      {
+        "name": "Sensors",
+        "path": "img/TrafficLightsRevival_Screenshot.png"
+      }
+    ],
+    "version": "1.0.0",
+    "updated": "2021-09-27"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=8.0.0",
+    "plugins": []
+  }
+}
