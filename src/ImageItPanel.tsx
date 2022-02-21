@@ -20,7 +20,7 @@ export const ImageItPanel: React.FC<Props> = ({
   fieldConfig,
   replaceVariables,
 }) => {
-  const { forceImageRefresh, lockSensors, mappings, sensors, sensorsTextSize } = options;
+  const { forceImageRefresh, lockSensors, mappings, sensors, sensorsColorGray, sensorsColorRed, sensorsColorYellow, sensorsColorGreen } = options;
   const theme = useTheme();
   const styles = getStyles();
 
@@ -66,7 +66,6 @@ export const ImageItPanel: React.FC<Props> = ({
           styles.imageWrapper,
           css`
             max-height: ${height}px;
-            font-size: ${(sensorsTextSize * imageDimensions.width) / 50 / 10}px;
           `
         )}
       >
@@ -101,6 +100,10 @@ export const ImageItPanel: React.FC<Props> = ({
 
             return (
               <Sensor
+                sensorscolorgray={sensorsColorGray}
+                sensorscolorred={sensorsColorRed}
+                sensorscoloryellow={sensorsColorYellow}
+                sensorscolorgreen={sensorsColorGreen}
                 draggable={lockSensors}
                 sensor={sensor}
                 mappings={sensorMappings}
@@ -111,6 +114,7 @@ export const ImageItPanel: React.FC<Props> = ({
                 onPositionChange={onSensorPositionChange}
                 value={value}
                 key={index}
+                sensorsTextSize={sensor.sensorsTextSize}
               />
             );
           })}

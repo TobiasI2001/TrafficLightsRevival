@@ -17,6 +17,7 @@ type Sensor = {
   };
   mappingIds: string[];
   unit: string | undefined;
+  sensorsTextSize: number;
   decimals: number;
 };
 

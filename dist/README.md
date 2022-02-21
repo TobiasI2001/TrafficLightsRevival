@@ -34,3 +34,9 @@ Known Bugs and Glitches:
  - In edit view the sensor cannot be moved as freely as in dashboard view. Fix: Reload the site and it works fine.
  - If sensor lock is enabled hovering doesn't show name and value.
  - When changing the font color to "text color" (<- black) the little dot of the color picker doesn't change, but the font color gets changed as intended.
+
+History:
+
+v1.1.0
+ - added variable changing of values to color (note that if two colors have the same value the lower color (in the options) will be picked)
+ - added changing of sensors size for each sensor -> before: size option for all sensors

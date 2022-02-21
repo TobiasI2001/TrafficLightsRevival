@@ -7,8 +7,13 @@ import SensorType from './types/Sensor';
 import MappingOperators from 'MappingOperators';
 import { Mapping } from 'types/Mapping';
 import { formattedValueToString, getValueFormat } from '@grafana/data';
+// import SensorColor from './types/SimpleOptions';
 
 type Props = {
+  sensorscolorgray: number;
+  sensorscolorred: number;
+  sensorscoloryellow: number;
+  sensorscolorgreen: number;
   sensor: SensorType;
   mappings: Mapping[];
   draggable: boolean;
@@ -21,6 +26,7 @@ type Props = {
   };
   onPositionChange: Function;
   value: any | undefined;
+  sensorsTextSize: number;
 };
 
 const pxToPerc = (px: number, size: number): number => {
@@ -33,7 +39,7 @@ const percToPx = (perc: number, size: number): number => {
 
 export const Sensor: React.FC<Props> = (props: Props) => {
   // const theme = useTheme();
-  const { draggable, imageDimensions, onPositionChange, index, link, name, mappings } = props;
+  const { draggable, imageDimensions, onPositionChange, index, link, name, mappings, sensorscolorgray, sensorscolorred, sensorscoloryellow, sensorscolorgreen, sensorsTextSize } = props;
   let sensor = clone(props.sensor) as SensorType & Mapping['values'];
   let value = clone(props.value);
 
@@ -71,19 +77,19 @@ export const Sensor: React.FC<Props> = (props: Props) => {
     }
   }
 
-  if (value == 0) {
+  if (value == sensorscolorgray) {
     sensor.backgroundColor = "gray";
   }
 
-  if (value == 1) {
+  if (value == sensorscolorred) {
     sensor.backgroundColor = "red";
   }
 
-  if (value == 2) {
+  if (value == sensorscoloryellow) {
     sensor.backgroundColor = "yellow";
   }
 
-  if (value == 3) {
+  if (value == sensorscolorgreen) {
     sensor.backgroundColor = "green";
   }
 
@@ -113,6 +119,7 @@ export const Sensor: React.FC<Props> = (props: Props) => {
                 color: ${sensor.fontColor};
                 background-color: ${sensor.backgroundColor};
                 border-radius: 50%;
+                font-size: ${(sensorsTextSize * imageDimensions.width) / 50 / 10}px;
               `,
               sensor.backgroundBlink && styles.blink
             )}

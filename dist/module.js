@@ -7197,7 +7197,10 @@ var ImageItPanel = function ImageItPanel(_a) {
       lockSensors = options.lockSensors,
       mappings = options.mappings,
       sensors = options.sensors,
-      sensorsTextSize = options.sensorsTextSize;
+      sensorsColorGray = options.sensorsColorGray,
+      sensorsColorRed = options.sensorsColorRed,
+      sensorsColorYellow = options.sensorsColorYellow,
+      sensorsColorGreen = options.sensorsColorGreen;
   var theme = Object(_grafana_ui__WEBPACK_IMPORTED_MODULE_5__["useTheme"])();
   var styles = getStyles();
   var imageRef = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null);
@@ -7245,7 +7248,7 @@ var ImageItPanel = function ImageItPanel(_a) {
     className: styles.wrapper
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "imageItBgImage",
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.imageWrapper, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n            max-height: ", "px;\n            font-size: ", "px;\n          "], ["\n            max-height: ", "px;\n            font-size: ", "px;\n          "])), height, sensorsTextSize * imageDimensions.width / 50 / 10))
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.imageWrapper, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n            max-height: ", "px;\n          "], ["\n            max-height: ", "px;\n          "])), height))
   }, sensors && sensors.map(function (sensor, index) {
     // Get serie for sensor based on refId or alias fields
     // let value: Number | undefined = undefined;
@@ -7276,6 +7279,10 @@ var ImageItPanel = function ImageItPanel(_a) {
       return typeof mapping !== 'undefined';
     });
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Sensor__WEBPACK_IMPORTED_MODULE_6__["Sensor"], {
+      sensorscolorgray: sensorsColorGray,
+      sensorscolorred: sensorsColorRed,
+      sensorscoloryellow: sensorsColorYellow,
+      sensorscolorgreen: sensorsColorGreen,
       draggable: lockSensors,
       sensor: sensor,
       mappings: sensorMappings,
@@ -7285,7 +7292,8 @@ var ImageItPanel = function ImageItPanel(_a) {
       imageDimensions: imageDimensions,
       onPositionChange: onSensorPositionChange,
       value: value,
-      key: index
+      key: index,
+      sensorsTextSize: sensor.sensorsTextSize
     });
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.bgImage, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_2 || (templateObject_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n              max-height: ", "px;\n            "], ["\n              max-height: ", "px;\n            "])), height)),
@@ -7407,7 +7415,12 @@ var Sensor = function Sensor(props) {
       index = props.index,
       link = props.link,
       name = props.name,
-      mappings = props.mappings;
+      mappings = props.mappings,
+      sensorscolorgray = props.sensorscolorgray,
+      sensorscolorred = props.sensorscolorred,
+      sensorscoloryellow = props.sensorscoloryellow,
+      sensorscolorgreen = props.sensorscolorgreen,
+      sensorsTextSize = props.sensorsTextSize;
   var sensor = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["clone"])(props.sensor);
   var value = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["clone"])(props.value);
   var styles = getStyles();
@@ -7464,19 +7477,19 @@ var Sensor = function Sensor(props) {
     }
   }
 
-  if (value == 0) {
+  if (value == sensorscolorgray) {
     sensor.backgroundColor = "gray";
   }
 
-  if (value == 1) {
+  if (value == sensorscolorred) {
     sensor.backgroundColor = "red";
   }
 
-  if (value == 2) {
+  if (value == sensorscoloryellow) {
     sensor.backgroundColor = "yellow";
   }
 
-  if (value == 3) {
+  if (value == sensorscolorgreen) {
     sensor.backgroundColor = "green";
   } // Get and apply unit type formatter
 
@@ -7492,7 +7505,7 @@ var Sensor = function Sensor(props) {
     onStop: onDragStop,
     position: sensorPosition
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.container, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                color: ", ";\n                background-color: ", ";\n                border-radius: 50%;\n              "], ["\n                color: ", ";\n                background-color: ", ";\n                border-radius: 50%;\n              "])), sensor.fontColor, sensor.backgroundColor), sensor.backgroundBlink && styles.blink),
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.container, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                color: ", ";\n                background-color: ", ";\n                border-radius: 50%;\n                font-size: ", "px;\n              "], ["\n                color: ", ";\n                background-color: ", ";\n                border-radius: 50%;\n                font-size: ", "px;\n              "])), sensor.fontColor, sensor.backgroundColor, sensorsTextSize * imageDimensions.width / 50 / 10), sensor.backgroundBlink && styles.blink),
     onMouseEnter: function onMouseEnter() {
       return setIsMouseOver(true);
     },
@@ -8085,6 +8098,16 @@ var EditorSensorItem = function EditorSensorItem(props) {
       color: sensor.fontColor
     }));
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Field"], {
+    label: "Size"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    value: sensor.sensorsTextSize,
+    type: "number",
+    onChange: function onChange(event) {
+      updateSensor(function (sensor) {
+        sensor.sensorsTextSize = Number.parseInt(event.currentTarget.value, 10);
+      });
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Field"], {
     label: "Decimals"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     value: sensor.decimals,
@@ -8139,6 +8162,7 @@ var defaultNewSensor = {
   },
   mappingIds: [],
   unit: undefined,
+  sensorsTextSize: 25,
   decimals: 2,
   valueBlink: false,
   backgroundBlink: false
@@ -8263,10 +8287,28 @@ var plugin = new _grafana_data__WEBPACK_IMPORTED_MODULE_1__["PanelPlugin"](_Imag
     defaultValue: false,
     category: ['Sensors']
   }).addNumberInput({
-    path: 'sensorsTextSize',
-    name: 'Sensors text size',
-    description: 'Default sensors text size. Default 25.',
-    defaultValue: 25,
+    path: 'sensorsColorGray',
+    name: 'Gray Color Value',
+    description: 'Value of Sensor Color Gray. Default 0',
+    defaultValue: 0,
+    category: ['Sensors']
+  }).addNumberInput({
+    path: 'sensorsColorRed',
+    name: 'Red Color Value',
+    description: 'Value of Sensor Color Red. Default 1',
+    defaultValue: 1,
+    category: ['Sensors']
+  }).addNumberInput({
+    path: 'sensorsColorYellow',
+    name: 'Yellow Color Value',
+    description: 'Value of Sensor Color Yellow. Default 2',
+    defaultValue: 2,
+    category: ['Sensors']
+  }).addNumberInput({
+    path: 'sensorsColorGreen',
+    name: 'Green Color Value',
+    description: 'Value of Sensor Color Green. Default 3',
+    defaultValue: 3,
     category: ['Sensors']
   }).addCustomEditor({
     id: 'sensors',

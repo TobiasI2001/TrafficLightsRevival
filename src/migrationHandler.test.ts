@@ -10,10 +10,13 @@ describe('Migration handler', () => {
         id: 1,
         fieldConfig: {} as unknown as FieldConfigSource,
         options: {
+          sensorsColorGray: 0,
+          sensorsColorRed: 1,
+          sensorsColorYellow: 2,
+          sensorsColorGreen: 3,
           forceImageRefresh: false,
           imageUrl: 'http://foo.bar/image.png',
           lockSensors: false,
-          sensorsTextSize: 20,
           mappings: [],
           sensors: [
             {
